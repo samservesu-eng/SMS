@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hearth &amp; Honey — Neighborhood Cafe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #FAF3E7;
+    --cream-2: #F3E9D6;
+    --pine: #2B3A2E;
+    --pine-2: #1E2A22;
+    --marigold: #E3A72F;
+    --brick: #A64B3E;
+    --ink: #2B241D;
+    --ink-soft: #57503F;
+    --line: rgba(43,36,29,0.14);
+    --radius-organic: 63% 37% 54% 46% / 48% 45% 55% 52%;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  h1,h2,h3{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    margin: 0 0 0.4em 0;
+    color: var(--pine-2);
+  }
+  p{ margin: 0 0 1em 0; color: var(--ink-soft); max-width: 62ch; }
+  a{ color: inherit; }
+  img{ max-width:100%; display:block; }
+
+  .wrap{ max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+
+  /* -------- Header -------- */
+  header{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(250,243,231,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 18px 0;
+  }
+  .brand{
+    font-family:'Fraunces', serif; font-weight:700; font-size: 1.3rem;
+    color: var(--pine-2); letter-spacing: -0.01em;
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand svg{ width:28px; height:28px; }
+  .nav-links{ display:flex; gap: 34px; list-style:none; margin:0; padding:0; }
+  .nav-links a{
+    text-decoration:none; font-size:0.96rem; font-weight:500;
+    color: var(--ink); position:relative;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; right:0; bottom:-6px; height:2px;
+    background: var(--brick); transform: scaleX(0); transform-origin: left;
+    transition: transform .25s ease;
+  }
+  .nav-links a:hover::after{ transform: scaleX(1); }
+  .nav-cta{
+    background: var(--pine); color: var(--cream); padding: 10px 20px;
+    border-radius: 8px; text-decoration:none; font-weight:600; font-size:0.92rem;
+  }
+  .menu-toggle{ display:none; }
+
+  /* -------- Hero -------- */
+  .hero{
+    padding: 88px 0 100px;
+    display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 48px; align-items:center;
+  }
+  .eyebrow-plain{ color: var(--brick); font-weight:600; font-size:0.95rem; margin-bottom: 14px; }
+  .hero h1{
+    font-size: clamp(2.6rem, 5vw, 3.6rem);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+  .hero p.lede{ font-size: 1.14rem; margin-top: 18px; max-width: 46ch; }
+  .hero-actions{ display:flex; gap:16px; margin-top: 32px; }
+  .btn{
+    display:inline-block; padding: 14px 26px; border-radius: 9px;
+    text-decoration:none; font-weight:600; font-size:0.98rem;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-primary{ background: var(--brick); color: #FFF6EC; }
+  .btn-primary:hover{ transform: translateY(-2px); box-shadow: 0 10px 20px rgba(166,75,62,0.25); }
+  .btn-secondary{ background: transparent; color: var(--pine-2); border: 1.5px solid var(--pine-2); }
+  .btn-secondary:hover{ background: var(--pine-2); color: var(--cream); }
+
+  .hero-art{ position:relative; }
+  .steam-cup{ width: 100%; height:auto; }
+  .steam path{ animation: rise 4s ease-in-out infinite; transform-origin: bottom center; }
+  .steam path:nth-child(2){ animation-delay: .6s; }
+  .steam path:nth-child(3){ animation-delay: 1.2s; }
+  @keyframes rise{
+    0%{ opacity:0; transform: translateY(6px) scaleY(0.9); }
+    30%{ opacity:0.8; }
+    100%{ opacity:0; transform: translateY(-22px) scaleY(1.05); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .steam path{ animation: none; opacity: 0.5; }
+  }
+
+  /* -------- Section shell -------- */
+  section{ padding: 84px 0; }
+  .section-head{ max-width: 640px; margin-bottom: 46px; }
+  .section-head h2{ font-size: clamp(1.9rem, 3vw, 2.4rem); }
+
+  /* -------- Menu -------- */
+  .menu-band{ background: var(--pine-2); color: var(--cream); }
+  .menu-band .section-head h2, .menu-band .section-head p{ color: var(--cream); }
+  .menu-band .section-head p{ color: rgba(250,243,231,0.72); }
+
+  .menu-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .menu-card{
+    background: rgba(250,243,231,0.06);
+    border: 1px solid rgba(250,243,231,0.14);
+    border-radius: var(--radius-organic);
+    padding: 40px 30px;
+    text-align:center;
+  }
+  .menu-card .glyph{ width:52px; height:52px; margin: 0 auto 18px; color: var(--marigold); }
+  .menu-card h3{ color: var(--cream); font-size:1.2rem; }
+  .menu-card p{ color: rgba(250,243,231,0.68); font-size:0.95rem; }
+  .menu-card .price{ color: var(--marigold); font-weight:600; font-family:'Fraunces',serif; font-size:1.05rem; margin-top:10px; display:block; }
+
+  /* -------- Story -------- */
+  .story{ display:grid; grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items:center; }
+  .story-mark{ width:100%; height:auto; }
+  blockquote{
+    font-family:'Fraunces', serif; font-style: italic; font-weight:500;
+    font-size: 1.35rem; color: var(--pine-2); line-height:1.5;
+    border-left: 3px solid var(--marigold); padding-left: 24px; margin: 28px 0;
+  }
+  blockquote cite{ display:block; font-style:normal; font-size:0.9rem; color: var(--ink-soft); margin-top:10px; }
+
+  /* -------- Hours / Visit -------- */
+  .visit{ background: var(--cream-2); }
+  .visit-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+  .hours-table{ width:100%; border-collapse: collapse; }
+  .hours-table tr{ border-bottom: 1px solid var(--line); }
+  .hours-table td{ padding: 13px 0; font-size:0.98rem; }
+  .hours-table td:first-child{ font-weight:600; color: var(--pine-2); }
+  .hours-table td:last-child{ text-align:right; color: var(--ink-soft); }
+
+  .locate-card{
+    background: var(--pine); color: var(--cream); border-radius: 18px;
+    padding: 36px; height:100%;
+  }
+  .locate-card h3{ color: var(--cream); font-size:1.25rem; }
+  .locate-card p{ color: rgba(250,243,231,0.75); }
+  .locate-card .addr{ font-weight:600; color: var(--cream); margin-top:18px; }
+
+  /* -------- Footer -------- */
+  footer{ padding: 52px 0; border-top: 1px solid var(--line); }
+  .foot-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; }
+  .foot-brand{ font-family:'Fraunces', serif; font-weight:700; color: var(--pine-2); }
+  .foot-links{ display:flex; gap:26px; list-style:none; padding:0; margin:0; }
+  .foot-links a{ text-decoration:none; color: var(--ink-soft); font-size:0.92rem; }
+  .foot-note{ color: var(--ink-soft); font-size: 0.85rem; margin-top: 14px; }
+
+  /* -------- Responsive -------- */
+  @media (max-width: 860px){
+    .hero{ grid-template-columns: 1fr; padding-top: 48px; }
+    .hero-art{ order:-1; max-width: 320px; margin: 0 auto; }
+    .menu-grid{ grid-template-columns: 1fr; }
+    .story{ grid-template-columns: 1fr; }
+    .story-mark{ max-width:260px; margin: 0 auto; }
+    .visit-grid{ grid-template-columns: 1fr; }
+    .nav-links{ display:none; }
+  }
+
+  :focus-visible{ outline: 2.5px solid var(--brick); outline-offset: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 9H17C18.1 9 19 9.9 19 11V13C19 15.7614 16.7614 18 14 18H8C5.23858 18 3 15.7614 3 13V9Z" stroke="#2B3A2E" stroke-width="1.6"/>
+        <path d="M17 10H19.5C20.8807 10 22 11.1193 22 12.5C22 13.8807 20.8807 15 19.5 15H18" stroke="#2B3A2E" stroke-width="1.6"/>
+        <path d="M7 4C7 5 6 5.2 6 6.4C6 7.2 7 7.4 7 8" stroke="#E3A72F" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M11 4C11 5 10 5.2 10 6.4C10 7.2 11 7.4 11 8" stroke="#E3A72F" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      Hearth &amp; Honey
+    </div>
+    <ul class="nav-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#story">Our story</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+    <a class="nav-cta" href="#visit">Find us</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div>
+      <div class="eyebrow-plain">Open daily from 7am, in the heart of the old mill district</div>
+      <h1>Slow mornings, good bread, and coffee worth lingering over.</h1>
+      <p class="lede">Hearth &amp; Honey is a small neighborhood cafe built around a wood-fired oven, a short seasonal menu, and the belief that breakfast should never be rushed.</p>
+      <div class="hero-actions">
+        <a href="#menu" class="btn btn-primary">See the menu</a>
+        <a href="#visit" class="btn btn-secondary">Find us</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg class="steam-cup" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g class="steam" stroke="#A64B3E" stroke-width="4" stroke-linecap="round" opacity="0.55">
+          <path d="M120 100C120 80 138 78 138 60" />
+          <path d="M160 100C160 80 178 78 178 60" />
+          <path d="M200 100C200 80 218 78 218 60" />
+        </g>
+        <ellipse cx="160" cy="140" rx="112" ry="20" fill="#E3A72F" opacity="0.18"/>
+        <path d="M60 130H240L226 240C222 260 205 274 184 274H116C95 274 78 260 74 240L60 130Z" fill="#2B3A2E"/>
+        <path d="M60 130H240L235 154H65L60 130Z" fill="#1E2A22"/>
+        <path d="M240 150C262 150 272 165 272 182C272 199 262 214 240 214" stroke="#2B3A2E" stroke-width="10" stroke-linecap="round"/>
+        <ellipse cx="160" cy="140" rx="88" ry="12" fill="#E3A72F"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="menu-band" id="menu">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>What's on this week</h2>
+        <p>A short menu, changed with the seasons, built around three woodfired ovens and a lot of patience.</p>
+      </div>
+      <div class="menu-grid">
+        <div class="menu-card">
+          <svg class="glyph" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20C10 13 16.5 8 24 8C31.5 8 38 13 38 20" stroke="currentColor" stroke-width="2.4"/>
+            <path d="M8 20H40L37 34C36 39 31.8 42 26.5 42H21.5C16.2 42 12 39 11 34L8 20Z" stroke="currentColor" stroke-width="2.4"/>
+          </svg>
+          <h3>Honey oat sourdough</h3>
+          <p>Baked at dawn with our own starter, wild honey, and toasted oats. Served warm.</p>
+          <span class="price">$7</span>
+        </div>
+        <div class="menu-card">
+          <svg class="glyph" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 18H34L32 36C31.5 39.5 28.5 42 25 42H23C19.5 42 16.5 39.5 16 36L14 18Z" stroke="currentColor" stroke-width="2.4"/>
+            <path d="M12 18H36" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M20 10C20 13 17 13.5 17 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M28 10C28 13 25 13.5 25 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <h3>Brown butter pastries</h3>
+          <p>Laminated by hand, filled daily — fig and mascarpone, or plain and perfect.</p>
+          <span class="price">$5</span>
+        </div>
+        <div class="menu-card">
+          <svg class="glyph" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 20H32C32 30 25 36 21 36C17 36 10 30 10 20Z" stroke="currentColor" stroke-width="2.4"/>
+            <path d="M32 22C38 22 40 26 40 29C40 32 38 35 32 35" stroke="currentColor" stroke-width="2.4"/>
+            <path d="M15 12C15 15 13 15 13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <h3>Slow-drip house blend</h3>
+          <p>Single-origin beans roasted three towns over, brewed one cup at a time.</p>
+          <span class="price">$4</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story">
+    <div class="wrap story">
+      <svg class="story-mark" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="130" cy="130" r="118" stroke="#A64B3E" stroke-width="1.5" stroke-dasharray="2 8"/>
+        <path d="M70 150C70 110 96 84 130 84C164 84 190 110 190 150" stroke="#2B3A2E" stroke-width="3"/>
+        <path d="M90 150H170L163 178C160 190 148 198 135 198H125C112 198 100 190 97 178L90 150Z" fill="#E3A72F" opacity="0.9"/>
+        <path d="M110 70C110 78 104 79 104 88" stroke="#A64B3E" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M150 70C150 78 144 79 144 88" stroke="#A64B3E" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="section-head" style="margin-bottom:8px;">
+          <h2>Started with one oven and a Sunday habit</h2>
+        </div>
+        <p>Hearth &amp; Honey began as a wood-fired oven in a backyard and a standing Sunday invitation to neighbors. Three years and one small storefront later, the oven's still the center of the room — everything else was built around it.</p>
+        <blockquote>
+          "We don't do fast food. We do slow mornings done properly, for people willing to sit for a minute."
+          <cite>— Dara Kessler, owner &amp; baker</cite>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap visit-grid">
+      <div>
+        <div class="section-head">
+          <h2>Hours</h2>
+        </div>
+        <table class="hours-table">
+          <tr><td>Monday – Friday</td><td>7:00am – 3:00pm</td></tr>
+          <tr><td>Saturday</td><td>8:00am – 4:00pm</td></tr>
+          <tr><td>Sunday</td><td>8:00am – 2:00pm</td></tr>
+        </table>
+      </div>
+      <div class="locate-card">
+        <h3>Find us</h3>
+        <p>Tucked into the old mill building, two doors down from the hardware store.</p>
+        <div class="addr">214 Millbrook Lane<br>Riverton, OH 43xxx</div>
+        <p style="margin-top:18px;">(555) 019-2244<br>hello@hearthandhoney.example</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>
+      <div class="foot-brand">Hearth &amp; Honey</div>
+      <div class="foot-note">© 2026 Hearth &amp; Honey Cafe. All rights reserved.</div>
+    </div>
+    <ul class="foot-links">
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#story">Our story</a></li>
+      <li><a href="#visit">Visit</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
